@@ -23,8 +23,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { trpc } from "~/trpc/react";
-
 const GITHUB_AVATAR_URI =
   "https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg";
 
@@ -34,8 +32,6 @@ export default function Screen() {
   function updateProgressValue() {
     setProgress(Math.floor(Math.random() * 100));
   }
-
-  const { data } = trpc.api.hello.useQuery({ text: "Dawg!" });
 
   return (
     <View className="flex-1 justify-center items-center gap-5 p-6 bg-secondary/30">
