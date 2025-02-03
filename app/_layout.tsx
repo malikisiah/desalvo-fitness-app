@@ -11,7 +11,8 @@ import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import queryClient from "@/utils/queryClient";
 
 import "../global.css";
 import React from "react";
@@ -60,7 +61,6 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const queryClient = new QueryClient();
 
   return (
     <>
