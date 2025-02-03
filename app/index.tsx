@@ -49,7 +49,7 @@ export default function Home() {
                 ./App.tsx
               </Text>
             </Box>
-            <Link href="/tabs/">
+            <Link href="/tabs">
               <Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column sm:flex-row md:self-start">
                 <Text className="text-typography-white font-normal">
                   Explore Tab Navigation

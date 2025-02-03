@@ -10,8 +10,11 @@ import { useEffect, useState } from "react";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../global.css";
+import React from "react";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,12 +60,20 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const queryClient = new QueryClient();
 
   return (
-    <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
-      </ThemeProvider>
-    </GluestackUIProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Slot />
+          </ThemeProvider>
+        </GluestackUIProvider>
+        <StatusBar style="light" />
+      </QueryClientProvider>
+    </>
   );
 }
