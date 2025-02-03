@@ -56,8 +56,8 @@ export default function RootLayout() {
 
   return (
     <>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <TRPCReactProvider>
+      <TRPCReactProvider>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
           <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
           <Stack>
             <Stack.Screen
@@ -69,8 +69,8 @@ export default function RootLayout() {
             />
           </Stack>
           <PortalHost />
-        </TRPCReactProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </TRPCReactProvider>
     </>
   );
 }

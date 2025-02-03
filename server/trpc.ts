@@ -1,5 +1,3 @@
-// server/api/trpc.ts
-
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1).
@@ -11,9 +9,7 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-// import { db } from "@/database/db";
-const db = null;
+import { db } from "~/supabase/supabase";
 
 /**
  * 1. CONTEXT
