@@ -35,8 +35,8 @@ export default function Screen() {
     setProgress(Math.floor(Math.random() * 100));
   }
 
-  const { data } = trpc.api.hello.useQuery();
-  console.log(data);
+  const { data } = trpc.api.hello.useQuery({ text: "Dawg!" });
+
   return (
     <View className="flex-1 justify-center items-center gap-5 p-6 bg-secondary/30">
       <Card className="w-full max-w-sm p-6 rounded-2xl">

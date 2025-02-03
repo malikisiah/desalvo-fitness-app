@@ -9,7 +9,7 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { db } from "~/supabase/supabase";
+import { db } from "~/utils/supabase/db";
 
 /**
  * 1. CONTEXT

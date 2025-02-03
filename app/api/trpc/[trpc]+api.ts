@@ -1,9 +1,7 @@
-// app/api/trpc/[trpc]+api.ts
-
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-import { createTRPCContext } from "~/server/trpc"; 
-import { appRouter } from "~/server/root";
+import { createTRPCContext } from "~/server/api/trpc";
+import { appRouter } from "~/server/api/root";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
