@@ -1,26 +1,20 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: '#0A2E42', // Darker blue-gray for readability
+    background: '#F8FAFC', // Soft, off-white for comfort
+    tint: '#008dcf', // Primary brand color
+    icon: '#0A7DBE', // Slightly lighter blue for consistency
+    tabIconDefault: '#5A9EC6', // Muted version of primary
+    tabIconSelected: '#008dcf', // Matches tint color
+    border: '#E2E8F0', // Soft cool gray for a clean, subtle divider
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#E3E3E3', // Soft light gray for better readability
+    background: '#1E1E1E', // Neutral dark gray for a balanced contrast
+    tint: '#008dcf', // Primary brand color
+    icon: '#60C1E8', // Softer blue for contrast
+    tabIconDefault: '#5A9EC6', // Subdued version of tint
+    tabIconSelected: '#008dcf', // Matches tint color
+    border: '#2C2F33', // Muted dark gray for a soft but clear separation
   },
 };

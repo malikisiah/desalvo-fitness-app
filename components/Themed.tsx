@@ -7,6 +7,7 @@ import { Text as DefaultText, View as DefaultView } from "react-native";
 
 import { Colors } from "../constants/Colors";
 import { useColorScheme } from "./useColorScheme";
+import React from "react";
 
 type ThemeProps = {
   lightColor?: string;
@@ -37,12 +38,22 @@ export function Text(props: TextProps) {
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
 
-export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const View = React.forwardRef<
+  React.ElementRef<typeof DefaultView>,
+  ViewProps
+>(({ style, lightColor, darkColor, ...otherProps }, ref) => {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"
   );
 
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
-}
+  return (
+    <DefaultView
+      ref={ref}
+      style={[{ backgroundColor }, style]}
+      {...otherProps}
+    />
+  );
+});
+
+View.displayName = "ThemedView";

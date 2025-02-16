@@ -36,17 +36,14 @@ export default function Home() {
         style={{ height: "100%" }}
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <Box className="absolute h-[500px] w-[500px] lg:w-[700px] lg:h-[700px]">
-          <Gradient />
-        </Box>
         <Box className="flex flex-1 items-center my-16 mx-5 lg:my-24 lg:mx-32">
           <Box className="gap-10 base:flex-col sm:flex-row justify-between sm:w-[80%] md:flex-1">
             <Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column md:flex-row md:self-start">
               <Text className="text-typography-white font-normal">
-                Get started by editing
+                Hello World
               </Text>
               <Text className="text-typography-white font-medium ml-2">
-                ./App.tsx
+                This is Gluestack UI
               </Text>
             </Box>
             <Link href="/tabs">
