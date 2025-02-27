@@ -24,6 +24,30 @@ export type Database = {
         }
         Relationships: []
       }
+      Workouts: {
+        Row: {
+          content: string | null
+          description: string
+          id: number
+          imageUrl: string
+          name: string
+        }
+        Insert: {
+          content?: string | null
+          description: string
+          id?: number
+          imageUrl: string
+          name: string
+        }
+        Update: {
+          content?: string | null
+          description?: string
+          id?: number
+          imageUrl?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

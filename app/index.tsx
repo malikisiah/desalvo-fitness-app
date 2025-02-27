@@ -1,18 +1,18 @@
-import { View, FlatList, TouchableWithoutFeedback } from "react-native";
+import { View, FlatList } from "react-native";
 import { Text } from "@rneui/themed";
 import { useTheme, Card } from "@rneui/themed";
 import { useQuery } from "@tanstack/react-query";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { Link } from "expo-router";
 import { supabase } from "@/utils/supabase";
 
 export default function Index() {
   const { theme } = useTheme();
 
   const { data } = useQuery({
-    queryKey: ["data"],
+    queryKey: ["workouts"],
     queryFn: async () => {
-      const { data } = await supabase.from("myTable").select();
+      const { data } = await supabase.from("Workouts").select();
       return data;
     },
   });
@@ -36,34 +36,39 @@ export default function Index() {
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TouchableWithoutFeedback onPress={() => console.log(item.content)}>
-              <Card
-                containerStyle={{
-                  backgroundColor: "black",
-                  borderWidth: 0,
-                  minWidth: 275,
+            <Card
+              containerStyle={{
+                backgroundColor: "black",
+                borderWidth: 0,
+                minWidth: 275,
+              }}
+              wrapperStyle={{
+                borderWidth: 1,
+                borderRadius: 10,
+                borderColor: theme.colors.grey0,
+                padding: 10,
+              }}
+            >
+              <Card.Image
+                source={{
+                  uri: item.imageUrl,
                 }}
-                wrapperStyle={{
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  borderColor: theme.colors.grey0,
-                  padding: 10,
-                }}
-              >
-                <Card.Title>
-                  <Text>{item.id}</Text>
-                </Card.Title>
-                <Card.Divider />
-                <Card.Image
-                  source={{
-                    uri: "https://images.unsplash.com/photo-1616803689943-5601631c7fec?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  }}
-                />
-                <Text style={{ marginBottom: 10, textAlign: "center" }}>
-                  {item.content}
+              />
+              <Card.Title>
+                <Text>{item.name}</Text>
+              </Card.Title>
+              <Card.Divider />
+              <Text style={{ marginBottom: 10, textAlign: "center" }}>
+                {item.description}
+              </Text>
+              <Link href={`/${item.id}`}>
+                <Text
+                  style={{ textAlign: "center", color: theme.colors.primary }}
+                >
+                  View
                 </Text>
-              </Card>
-            </TouchableWithoutFeedback>
+              </Link>
+            </Card>
           )}
           contentContainerStyle={{
             flexGrow: 1,
