@@ -38,14 +38,15 @@ export default function Index() {
           renderItem={({ item }) => (
             <Card
               containerStyle={{
-                backgroundColor: "black",
+                backgroundColor: theme.colors.grey0,
                 borderWidth: 0,
+                borderRadius: 10,
                 minWidth: 275,
               }}
               wrapperStyle={{
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: theme.colors.grey0,
+                // borderWidth: 1,
+                // borderRadius: 10,
+                // borderColor: theme.colors.grey0,
                 padding: 10,
               }}
             >
@@ -63,7 +64,7 @@ export default function Index() {
               </Text>
               <Link href={`/${item.id}`}>
                 <Text
-                  style={{ textAlign: "center", color: theme.colors.primary }}
+                  style={{ textAlign: "center", color: theme.colors.secondary }}
                 >
                   View
                 </Text>

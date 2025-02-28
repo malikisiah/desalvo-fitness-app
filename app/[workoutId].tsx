@@ -3,18 +3,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@rneui/themed";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-import { Text } from "@rneui/themed";
-import { Tile } from "@rneui/themed";
+import { Text, Tile } from "@rneui/themed";
+import { View, ActivityIndicator } from "react-native";
 import { Suspense } from "react";
-import Skeleton from "@/components/Skeleton";
-import { View } from "react-native";
 
-export default function Page() {
+function WorkoutDetails() {
   const { theme } = useTheme();
   const { workoutId } = useLocalSearchParams();
 
   const { data } = useSuspenseQuery({
-    queryKey: ["workout"],
+    queryKey: ["workout", workoutId], // Ensure a unique query key
     queryFn: async () => {
       const { data } = await supabase
         .from("Workouts")
@@ -25,23 +23,55 @@ export default function Page() {
     },
   });
 
-  if (data) {
+  // delay to test loading state
+  // const { data } = useSuspenseQuery({
+  //   queryKey: ["workout", workoutId],
+  //   queryFn: async () => {
+  //     return new Promise((resolve) => {
+  //       setTimeout(async () => {
+  //         const { data } = await supabase
+  //           .from("Workouts")
+  //           .select()
+  //           .eq("id", Number(workoutId))
+  //           .single();
+  //         resolve(data);
+  //       }, 5000); // 5-second delay
+  //     });
+  //   },
+  // });
+
+  if (!data) {
     return (
-      <Suspense fallback={<Skeleton />}>
-        <SafeAreaView
-          style={{ backgroundColor: theme.colors.background, flex: 1 }}
-        >
-          <View style={{ flex: 1, alignItems: "center", marginTop: "20%" }}>
-            <Tile
-              imageSrc={{ uri: data.imageUrl }}
-              title={data.name}
-              imageContainerStyle={{ borderRadius: 10 }}
-              titleStyle={{ color: theme.colors.white, textAlign: "center" }}
-            />
-            <Text>{data.content}</Text>
-          </View>
-        </SafeAreaView>
-      </Suspense>
+      <SafeAreaView
+        style={{ backgroundColor: theme.colors.background, flex: 1 }}
+      >
+        <View
+          style={{ flex: 1, alignItems: "center", marginTop: "20%" }}
+        ></View>
+        <Text>No Workout Found</Text>
+      </SafeAreaView>
     );
   }
+
+  return (
+    <SafeAreaView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+      <View style={{ flex: 1, alignItems: "center", marginTop: "20%" }}>
+        <Tile
+          imageSrc={{ uri: data.imageUrl }}
+          title={data.name}
+          imageContainerStyle={{ borderRadius: 10 }}
+          titleStyle={{ color: theme.colors.black, textAlign: "center" }}
+        />
+        <Text>{data.content}</Text>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<ActivityIndicator size="large" color="#0000ff" />}>
+      <WorkoutDetails />
+    </Suspense>
+  );
 }
