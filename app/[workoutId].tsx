@@ -4,8 +4,10 @@ import { useTheme } from "@rneui/themed";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
 import { Text, Tile } from "@rneui/themed";
-import { View, ActivityIndicator } from "react-native";
+import { View } from "react-native";
 import { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import Center from "@/components/Center";
 
 function WorkoutDetails() {
   const { theme } = useTheme();
@@ -23,7 +25,6 @@ function WorkoutDetails() {
     },
   });
 
-  // delay to test loading state
   // const { data } = useSuspenseQuery({
   //   queryKey: ["workout", workoutId],
   //   queryFn: async () => {
@@ -35,7 +36,7 @@ function WorkoutDetails() {
   //           .eq("id", Number(workoutId))
   //           .single();
   //         resolve(data);
-  //       }, 5000); // 5-second delay
+  //       }, 10000); // 5-second delay
   //     });
   //   },
   // });
@@ -54,9 +55,10 @@ function WorkoutDetails() {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
-      <View style={{ flex: 1, alignItems: "center", marginTop: "20%" }}>
+    <Center>
+      <View>
         <Tile
+          containerStyle={{ maxWidth: "90%" }}
           imageSrc={{ uri: data.imageUrl }}
           title={data.name}
           imageContainerStyle={{ borderRadius: 10 }}
@@ -64,13 +66,13 @@ function WorkoutDetails() {
         />
         <Text>{data.content}</Text>
       </View>
-    </SafeAreaView>
+    </Center>
   );
 }
 
 export default function Page() {
   return (
-    <Suspense fallback={<ActivityIndicator size="large" color="#0000ff" />}>
+    <Suspense fallback={<LoadingSpinner />}>
       <WorkoutDetails />
     </Suspense>
   );

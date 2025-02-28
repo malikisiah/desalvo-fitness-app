@@ -26,27 +26,27 @@ export default function RootLayout() {
       disabled: "#bdbdbd",
       divider: "#e0e0e0",
     },
-    darkColors: {
-      primary: "#008dcf",
-      secondary: "#00bcd4",
-      background: "#121212",
-      white: "#000000",
-      black: "#ffffff",
-      grey0: "#303030",
-      grey1: "#424242",
-      grey2: "#616161",
-      grey3: "#757575",
-      grey4: "#9e9e9e",
-      grey5: "#bdbdbd",
-      greyOutline: "#424242",
-      searchBg: "#1e1e1e",
-      success: "#4caf50",
-      warning: "#ff9800",
-      error: "#f44336",
-      disabled: "#616161",
-      divider: "#2c2c2c",
-    },
-    mode: "dark",
+    // darkColors: {
+    //   primary: "#008dcf",
+    //   secondary: "#00bcd4",
+    //   background: "#121212",
+    //   white: "#000000",
+    //   black: "#ffffff",
+    //   grey0: "#303030",
+    //   grey1: "#424242",
+    //   grey2: "#616161",
+    //   grey3: "#757575",
+    //   grey4: "#9e9e9e",
+    //   grey5: "#bdbdbd",
+    //   greyOutline: "#424242",
+    //   searchBg: "#1e1e1e",
+    //   success: "#4caf50",
+    //   warning: "#ff9800",
+    //   error: "#f44336",
+    //   disabled: "#616161",
+    //   divider: "#2c2c2c",
+    // },
+    mode: "light",
   });
 
   return (
@@ -58,7 +58,8 @@ export default function RootLayout() {
             animation: "fade_from_bottom",
           }}
         />
-        <StatusBar style="light" />
+
+        <StatusBar style="dark" />
       </ThemeProvider>
     </QueryClientProvider>
   );
