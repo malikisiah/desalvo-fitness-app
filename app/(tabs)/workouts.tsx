@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Link } from "expo-router";
 import { supabase } from "@/utils/supabase";
-import Center from "@/components/Center";
+import Screen from "@/components/ui/Screen";
 
 export default function Tab() {
   const { theme } = useTheme();
@@ -19,7 +19,7 @@ export default function Tab() {
   });
 
   return (
-    <Center>
+    <Screen>
       <View style={{ width: "100%" }}>
         <Text h2> Workouts</Text>
         <FlatList
@@ -76,6 +76,6 @@ export default function Tab() {
           style={{ width: "100%" }}
         />
       </View>
-    </Center>
+    </Screen>
   );
 }

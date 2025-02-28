@@ -6,8 +6,8 @@ import { supabase } from "@/utils/supabase";
 import { Text, Tile } from "@rneui/themed";
 import { View } from "react-native";
 import { Suspense } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import Center from "@/components/Center";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import Screen from "@/components/ui/Screen";
 
 function WorkoutDetails() {
   const { theme } = useTheme();
@@ -55,7 +55,7 @@ function WorkoutDetails() {
   }
 
   return (
-    <Center>
+    <Screen>
       <View>
         <Tile
           containerStyle={{ maxWidth: "90%" }}
@@ -66,7 +66,7 @@ function WorkoutDetails() {
         />
         <Text>{data.content}</Text>
       </View>
-    </Center>
+    </Screen>
   );
 }
 

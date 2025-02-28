@@ -1,9 +1,9 @@
-import Center from "@/components/Center";
+import Screen from "@/components/ui/Screen";
 import { Text } from "@rneui/themed";
 export default function Tab() {
   return (
-    <Center>
+    <Screen>
       <Text>This is the profile page</Text>
-    </Center>
+    </Screen>
   );
 }

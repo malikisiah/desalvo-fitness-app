@@ -1,31 +1,33 @@
-import { View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
+import Screen from "@/components/ui/Screen";
+import { Session } from "@supabase/supabase-js";
+import { useState, useEffect } from "react";
+import Auth from "@/components/Auth";
+import { supabase } from "@/utils/supabase";
 
 export default function Index() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
   const router = useRouter();
 
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ fontSize: 24, marginBottom: 20 }}>
-        Authentication screen
-      </Text>
+  useEffect(() => {
+    if (session?.user) {
+      router.replace("/(tabs)");
+    }
+  });
 
-      {/* Try programmatic navigation */}
-      <Pressable
-        onPress={() => {
-          router.replace("/(tabs)");
-        }}
-        style={{
-          marginTop: 20,
-          padding: 12,
-          backgroundColor: "green",
-          borderRadius: 8,
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 18 }}>
-          Go to Tabs (Router Push)
-        </Text>
-      </Pressable>
-    </View>
+  return (
+    <Screen>
+      <Auth />
+    </Screen>
   );
 }

@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@rneui/themed";
 import type { ReactNode } from "react";
 
-export default function Center({ children }: { children: ReactNode }) {
+export default function Screen({ children }: { children: ReactNode }) {
   const { theme } = useTheme();
   return (
     <SafeAreaView

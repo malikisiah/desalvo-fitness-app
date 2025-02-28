@@ -1,14 +1,14 @@
 import { ActivityIndicator, View } from "react-native";
 import { useTheme } from "@rneui/themed";
-import Center from "./Center";
+import Screen from "./Screen";
 
 export default function LoadingSpinner() {
   const { theme } = useTheme();
   return (
-    <Center>
+    <Screen>
       <View style={{ marginTop: "35%" }}>
         <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
-    </Center>
+    </Screen>
   );
 }
