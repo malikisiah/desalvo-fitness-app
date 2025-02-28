@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import queryClient from "@/utils/queryClient";
+import queryClient from "@/utils/query-client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider, createTheme } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
