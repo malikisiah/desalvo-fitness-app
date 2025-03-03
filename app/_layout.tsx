@@ -57,7 +57,9 @@ export default function RootLayout() {
             headerShown: false,
             animation: "fade_from_bottom",
           }}
-        />
+        >
+          <Stack.Screen name="index" />
+        </Stack>
 
         <StatusBar style="dark" />
       </ThemeProvider>

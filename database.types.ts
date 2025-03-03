@@ -9,42 +9,57 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      myTable: {
+      profiles: {
         Row: {
-          content: string
-          id: number
+          avatar_url: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+          website: string | null
         }
         Insert: {
-          content: string
-          id?: number
+          avatar_url?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
         }
         Update: {
-          content?: string
-          id?: number
+          avatar_url?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
         }
         Relationships: []
       }
       Workouts: {
         Row: {
-          content: string | null
+          content: string
           description: string
           id: number
           imageUrl: string
           name: string
+          videoUrl: string
         }
         Insert: {
-          content?: string | null
+          content: string
           description: string
           id?: number
           imageUrl: string
           name: string
+          videoUrl: string
         }
         Update: {
-          content?: string | null
+          content?: string
           description?: string
           id?: number
           imageUrl?: string
           name?: string
+          videoUrl?: string
         }
         Relationships: []
       }
