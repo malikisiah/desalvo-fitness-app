@@ -1,5 +1,5 @@
 import Screen from "@/components/ui/Screen";
-import { Text } from "@rneui/themed";
+import { Text } from "react-native-paper";
 export default function Tab() {
   return (
     <Screen>

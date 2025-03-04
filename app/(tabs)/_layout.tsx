@@ -1,15 +1,14 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
-import { useTheme } from "@rneui/themed";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 export default function TabLayout() {
-  const { theme } = useTheme();
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.primary,
+        tabBarActiveTintColor: "blue",
         headerShown: false,
-        tabBarStyle: { backgroundColor: theme.colors.background },
+        tabBarStyle: { backgroundColor: "white" },
       }}
     >
       <Tabs.Screen

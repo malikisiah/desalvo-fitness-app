@@ -1,9 +1,10 @@
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme } from "@rneui/themed";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-import { Text, Tile } from "@rneui/themed";
+import { Text } from "react-native-paper";
+import { Image } from "expo-image";
 import { Pressable, View } from "react-native";
 import { Suspense, useState } from "react";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
@@ -12,7 +13,6 @@ import Modal from "@/components/ui/Modal";
 import VideoScreen from "@/components/ui/VideoScreen";
 
 function WorkoutDetails() {
-  const { theme } = useTheme();
   const { workoutId } = useLocalSearchParams();
   const [visible, setVisible] = useState(false);
 
@@ -46,9 +46,7 @@ function WorkoutDetails() {
 
   if (!data) {
     return (
-      <SafeAreaView
-        style={{ backgroundColor: theme.colors.background, flex: 1 }}
-      >
+      <SafeAreaView>
         <View
           style={{ flex: 1, alignItems: "center", marginTop: "20%" }}
         ></View>
@@ -63,15 +61,11 @@ function WorkoutDetails() {
         {" "}
         <VideoScreen source={data.videoUrl} />
       </Modal>
-      <View style={{ gap: "5%" }}>
-        <Tile
-          containerStyle={{ maxWidth: "90%" }}
-          imageSrc={{ uri: data.imageUrl }}
-          title={data.name}
-          imageContainerStyle={{ borderRadius: 10 }}
-          titleStyle={{ color: theme.colors.black, textAlign: "center" }}
-        />
+      <View style={{ gap: "5%", maxWidth: "90%" }}>
+        <Image style={{ borderRadius: 10 }} source={data.imageUrl} />
+        <Text variant="headlineMedium"> {data.name}</Text>
         <Text>{data.content}</Text>
+
         <Pressable onPress={() => setVisible(true)}>
           <Text style={{ fontFamily: "Inter_900Black" }}>View</Text>
         </Pressable>

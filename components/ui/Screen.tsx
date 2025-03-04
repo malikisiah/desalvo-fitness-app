@@ -1,14 +1,12 @@
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme } from "@rneui/themed";
 import type { ReactNode } from "react";
 
 export default function Screen({ children }: { children: ReactNode }) {
-  const { theme } = useTheme();
   return (
     <SafeAreaView
       style={{
-        backgroundColor: theme.colors.background,
+        backgroundColor: "white",
         flex: 1,
       }}
     >

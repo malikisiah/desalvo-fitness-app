@@ -7,8 +7,8 @@ import {
   View,
 } from "react-native";
 import { supabase } from "@/utils/supabase";
-import { Button, Input } from "@rneui/themed";
 
+import { Button, TextInput } from "react-native-paper";
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,9 +45,8 @@ export default function Auth() {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <Input
+          <TextInput
             label="Email"
-            leftIcon={{ type: "font-awesome", name: "envelope" }}
             onChangeText={(text) => setEmail(text)}
             value={email}
             placeholder="email@address.com"
@@ -59,9 +58,8 @@ export default function Auth() {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <Input
+          <TextInput
             label="Password"
-            leftIcon={{ type: "font-awesome", name: "lock" }}
             onChangeText={(text) => setPassword(text)}
             value={password}
             secureTextEntry={true}
@@ -71,18 +69,14 @@ export default function Auth() {
         </KeyboardAvoidingView>
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          title="Sign in"
-          disabled={loading}
-          onPress={() => signInWithEmail()}
-        />
+        <Button disabled={loading} onPress={() => signInWithEmail()}>
+          Sign In
+        </Button>
       </View>
       <View style={styles.verticallySpaced}>
-        <Button
-          title="Sign up"
-          disabled={loading}
-          onPress={() => signUpWithEmail()}
-        />
+        <Button disabled={loading} onPress={() => signUpWithEmail()}>
+          Sign Up
+        </Button>
       </View>
     </View>
   );

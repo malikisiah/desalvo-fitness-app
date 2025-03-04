@@ -1,6 +1,6 @@
 import Screen from "@/components/ui/Screen";
 import { useState } from "react";
-import { Text } from "@rneui/themed";
+import { Text } from "react-native-paper";
 import { View } from "react-native";
 import Modal from "@/components/ui/Modal";
 import VideoScreen from "@/components/ui/VideoScreen";
