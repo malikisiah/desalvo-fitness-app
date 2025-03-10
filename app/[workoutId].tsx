@@ -3,18 +3,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-import { Text } from "react-native-paper";
+import { Text } from "react-native";
 import { Image } from "expo-image";
-import { Pressable, View } from "react-native";
-import { Suspense, useState } from "react";
-import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import Screen from "@/components/ui/Screen";
-import Modal from "@/components/ui/Modal";
-import VideoScreen from "@/components/ui/VideoScreen";
+import { View } from "react-native";
+import { Suspense } from "react";
+import Box from "@/components/ui/Box";
 
 function WorkoutDetails() {
   const { workoutId } = useLocalSearchParams();
-  const [visible, setVisible] = useState(false);
 
   const { data } = useSuspenseQuery({
     queryKey: ["workout", workoutId], // Ensure a unique query key
@@ -56,27 +52,19 @@ function WorkoutDetails() {
   }
 
   return (
-    <Screen>
-      <Modal visible={visible} setVisible={setVisible}>
-        {" "}
-        <VideoScreen source={data.videoUrl} />
-      </Modal>
+    <Box>
       <View style={{ gap: "5%", maxWidth: "90%" }}>
         <Image style={{ borderRadius: 10 }} source={data.imageUrl} />
-        <Text variant="headlineMedium"> {data.name}</Text>
+        <Text> {data.name}</Text>
         <Text>{data.content}</Text>
-
-        <Pressable onPress={() => setVisible(true)}>
-          <Text style={{ fontFamily: "Inter_900Black" }}>View</Text>
-        </Pressable>
       </View>
-    </Screen>
+    </Box>
   );
 }
 
 export default function Page() {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
+    <Suspense fallback={<Text> Loading... </Text>}>
       <WorkoutDetails />
     </Suspense>
   );

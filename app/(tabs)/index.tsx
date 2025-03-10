@@ -1,19 +1,13 @@
-import Screen from "@/components/ui/Screen";
-import { useState } from "react";
-import { Text } from "react-native-paper";
+import { Text } from "react-native";
 import { View } from "react-native";
-import Modal from "@/components/ui/Modal";
-import VideoScreen from "@/components/ui/VideoScreen";
+
+import Box from "@/components/ui/Box";
 export default function Index() {
-  const [visible, setVisible] = useState(false);
   return (
-    <Screen>
-      <Modal visible={visible} setVisible={setVisible}>
-        <VideoScreen source="https://pnuumfcutriffhbuofvx.supabase.co/storage/v1/object/public/workouts//pushups.mp4" />
-      </Modal>
+    <Box>
       <View style={{ marginTop: "25%" }}>
         <Text> Home Screen</Text>
       </View>
-    </Screen>
+    </Box>
   );
 }

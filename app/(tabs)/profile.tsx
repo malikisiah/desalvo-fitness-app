@@ -1,9 +1,9 @@
-import Screen from "@/components/ui/Screen";
-import { Text } from "react-native-paper";
+import Box from "@/components/ui/Box";
+import { Text } from "react-native";
 export default function Tab() {
   return (
-    <Screen>
+    <Box>
       <Text>This is the profile page</Text>
-    </Screen>
+    </Box>
   );
 }

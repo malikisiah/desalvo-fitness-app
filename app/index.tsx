@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import Screen from "@/components/ui/Screen";
 import { Session } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import Auth from "@/components/Auth";
@@ -25,9 +24,5 @@ export default function Index() {
     }
   });
 
-  return (
-    <Screen>
-      <Auth />
-    </Screen>
-  );
+  return <Auth />;
 }

@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import { supabase } from "@/utils/supabase";
 
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native";
+import Box from "./ui/Box";
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,45 +41,49 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-        >
-          <TextInput
-            label="Email"
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            placeholder="email@address.com"
-            autoCapitalize={"none"}
+    <Box>
+      <View style={styles.container}>
+        <View style={[styles.verticallySpaced, styles.mt20]}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+          >
+            <TextInput
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+              placeholder="email@address.com"
+              autoCapitalize={"none"}
+            />
+          </KeyboardAvoidingView>
+        </View>
+        <View style={styles.verticallySpaced}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+          >
+            <TextInput
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+              secureTextEntry={true}
+              placeholder="Password"
+              autoCapitalize={"none"}
+            />
+          </KeyboardAvoidingView>
+        </View>
+        <View style={[styles.verticallySpaced, styles.mt20]}>
+          <Button
+            title="Sign In"
+            disabled={loading}
+            onPress={() => signInWithEmail()}
           />
-        </KeyboardAvoidingView>
-      </View>
-      <View style={styles.verticallySpaced}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-        >
-          <TextInput
-            label="Password"
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            secureTextEntry={true}
-            placeholder="Password"
-            autoCapitalize={"none"}
+        </View>
+        <View style={styles.verticallySpaced}>
+          <Button
+            title="Sign Up"
+            disabled={loading}
+            onPress={() => signUpWithEmail()}
           />
-        </KeyboardAvoidingView>
+        </View>
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button disabled={loading} onPress={() => signInWithEmail()}>
-          Sign In
-        </Button>
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button disabled={loading} onPress={() => signUpWithEmail()}>
-          Sign Up
-        </Button>
-      </View>
-    </View>
+    </Box>
   );
 }
 

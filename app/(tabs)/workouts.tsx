@@ -1,49 +1,48 @@
-import { FlatList, View } from "react-native";
-import { Text, Card, Button } from "react-native-paper";
-
+import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-
-// import { Link } from "expo-router";
 import { supabase } from "@/utils/supabase";
-import Screen from "@/components/ui/Screen";
-import { Image } from "expo-image";
+import Box from "@/components/ui/Box";
 
 export default function Tab() {
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["workouts"],
     queryFn: async () => {
-      const { data } = await supabase.from("Workouts").select();
-      return data;
+      const { data, error } = await supabase.from("Workouts").select();
+      if (error) throw error; // Handle errors properly
+      return data || []; // Always return an array to prevent crashes
     },
   });
 
-  return (
-    <Screen>
-      <View style={{ width: "100%" }}>
-        <Text>Workouts</Text>
-        <FlatList
-          data={data}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <Card
-              style={{
-                maxWidth: "75%",
-              }}
-            >
-              <Image style={{ borderRadius: 10 }} source={item.imageUrl} />
-              <Card.Title title={item.name} />
+  if (isLoading) {
+    return (
+      <Box>
+        <ActivityIndicator size="large" />
+      </Box>
+    );
+  }
 
-              <Card.Content>
-                <Text style={{ marginBottom: 10, textAlign: "center" }}>
-                  {item.description}
-                </Text>
-              </Card.Content>
-              <Card.Cover source={{ uri: item.imageUrl }} />
-              <Card.Actions>
-                <Button> Ok</Button>
-              </Card.Actions>
-            </Card>
+  if (error) {
+    return (
+      <Box>
+        <Text style={{ color: "red" }}>Error loading workouts</Text>
+      </Box>
+    );
+  }
+
+  return (
+    <Box>
+      <View style={{ width: "100%" }}>
+        <Text style={{ textAlign: "center" }}>Workouts</Text>
+        <FlatList
+          data={data || []} // Ensure data is always an array
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) =>
+            item.id?.toString() ?? Math.random().toString()
+          }
+          renderItem={({ item }) => (
+            <View>
+              <Text>{item.name.toString() || "Unnamed Workout"}</Text>
+            </View>
           )}
           contentContainerStyle={{
             flexGrow: 1,
@@ -54,6 +53,6 @@ export default function Tab() {
           style={{ width: "100%" }}
         />
       </View>
-    </Screen>
+    </Box>
   );
 }
