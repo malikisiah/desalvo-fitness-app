@@ -5,6 +5,8 @@ const palette = {
   purplePrimary: "#5A31F4",
   purpleDark: "#3F22AB",
 
+  DeSalvoBlue: "#118ecc",
+
   greenLight: "#56DCBA",
   greenPrimary: "#0ECD9D",
   greenDark: "#0A906E",
@@ -21,7 +23,7 @@ const theme = createTheme({
   colors: {
     mainBackground: palette.white,
     cardPrimaryBackground: palette.purplePrimary,
-    primary: palette.purplePrimary,
+    primary: palette.DeSalvoBlue,
     secondary: palette.greenPrimary,
     danger: palette.red,
     textPrimary: palette.black,
