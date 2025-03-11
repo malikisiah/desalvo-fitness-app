@@ -2,7 +2,6 @@ import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
 import Box from "@/components/ui/Box";
-import { Image } from "expo-image";
 
 export default function Tab() {
   const { data, isLoading, error } = useQuery({
@@ -40,14 +39,7 @@ export default function Tab() {
           keyExtractor={(item) =>
             item.id?.toString() ?? Math.random().toString()
           }
-          renderItem={({ item }) => (
-            <View style={{ backgroundColor: "blue", maxWidth: "75%" }}>
-              <Image
-                source={item.imageUrl}
-                style={{ width: 100, height: 100 }}
-              />
-            </View>
-          )}
+          renderItem={({ item }) => <Text> {item.name}</Text>}
           contentContainerStyle={{
             flexGrow: 1,
             alignItems: "center",

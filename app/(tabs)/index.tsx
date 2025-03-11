@@ -1,13 +1,13 @@
-import { Text } from "react-native";
+import Text from "@/components/ui/Text";
+import Screen from "@/components/ui/Screen";
 import { View } from "react-native";
 
-import Box from "@/components/ui/Box";
 export default function Index() {
   return (
-    <Box>
-      <View style={{ marginTop: "25%" }}>
-        <Text> Home Screen</Text>
+    <Screen>
+      <View>
+        <Text variant="header">Hello World</Text>
       </View>
-    </Box>
+    </Screen>
   );
 }

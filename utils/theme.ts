@@ -4,7 +4,6 @@ const palette = {
   purpleLight: "#8C6FF7",
   purplePrimary: "#5A31F4",
   purpleDark: "#3F22AB",
-
   DeSalvoBlue: "#118ecc",
 
   greenLight: "#56DCBA",
@@ -49,24 +48,16 @@ const theme = createTheme({
 
   textVariants: {
     header: {
-      fontWeight: "bold",
+      fontFamily: "BebasNeue",
       fontSize: 34,
       color: "textPrimary",
     },
-    body: {
-      fontSize: 16,
-      lineHeight: 24,
-      color: "textSecondary",
-    },
-    button: {
-      fontSize: 16,
-      fontWeight: "bold",
-      textAlign: "center",
-      color: "white",
-    },
+
     defaults: {
       fontSize: 14,
+      fontFamily: "Urbanist",
       color: "textPrimary",
+      fontWeight: "semibold",
     },
   },
 });
