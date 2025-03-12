@@ -55,7 +55,7 @@ const theme = createTheme({
 
     subheader: {
       fontFamily: "Urbanist",
-      fontsize: 28,
+      fontSize: 28,
       color: "textPrimary",
     },
 
@@ -77,7 +77,7 @@ const theme = createTheme({
       shadowOpacity: 0.1,
       shadowRadius: 6,
       elevation: 3,
-      width: "100%",
+      width: "90%",
     },
   },
 });

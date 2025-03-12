@@ -23,18 +23,24 @@ const Card = ({
   image,
   title,
   content,
+  ...rest
 }: {
   image: string;
   title: string;
   content: string;
-}) => {
+} & Props) => {
   return (
-    <CardContainer>
-      <Box>
-        <Text>{title}</Text>
+    <CardContainer {...rest}>
+      <Box gap="s">
+        <Text variant="subheader">{title}</Text>
         <Image
           source={image}
-          style={{ flex: 1, aspectRatio: "16/9", width: "100%" }}
+          style={{
+            flex: 1,
+            aspectRatio: "16/9",
+            width: "100%",
+            borderRadius: 10,
+          }}
         />
         <Text>{content}</Text>
       </Box>

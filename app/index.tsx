@@ -16,6 +16,7 @@ export default function Index() {
       setSession(session);
     });
   }, []);
+
   const router = useRouter();
 
   useEffect(() => {

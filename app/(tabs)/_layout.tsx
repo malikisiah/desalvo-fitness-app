@@ -3,6 +3,7 @@ import { Tabs } from "expo-router";
 import { Theme } from "@/utils/theme";
 import { useTheme } from "@shopify/restyle";
 import Ionicons from "@expo/vector-icons/Ionicons";
+
 export default function TabLayout() {
   const theme = useTheme<Theme>();
   return (
