@@ -10,6 +10,7 @@ import { Theme } from "@/utils/theme";
 import Box from "./Box";
 import { Image } from "expo-image";
 import Text from "./Text";
+import { Link } from "expo-router";
 
 type Props = VariantProps<Theme, "cardVariants"> &
   ViewProps &
@@ -23,11 +24,13 @@ const Card = ({
   image,
   title,
   content,
+  href,
   ...rest
 }: {
   image: string;
   title: string;
   content: string;
+  href: `/${string}`;
 } & Props) => {
   return (
     <CardContainer {...rest}>
@@ -43,6 +46,7 @@ const Card = ({
           }}
         />
         <Text>{content}</Text>
+        <Link href={href}>Action</Link>
       </Box>
     </CardContainer>
   );

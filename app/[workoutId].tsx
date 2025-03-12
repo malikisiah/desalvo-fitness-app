@@ -1,13 +1,12 @@
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-import { Text } from "react-native";
-import { Image } from "expo-image";
-import { View } from "react-native";
-import { Suspense } from "react";
-import Box from "@/components/ui/Box";
+import Text from "@/components/ui/Text";
+import { ScrollView, View } from "react-native";
+import React, { Suspense } from "react";
+import Screen from "@/components/ui/Screen";
+import Video from "@/components/ui/Video";
 
 function WorkoutDetails() {
   const { workoutId } = useLocalSearchParams();
@@ -24,22 +23,6 @@ function WorkoutDetails() {
     },
   });
 
-  // const { data } = useSuspenseQuery({
-  //   queryKey: ["workout", workoutId],
-  //   queryFn: async () => {
-  //     return new Promise((resolve) => {
-  //       setTimeout(async () => {
-  //         const { data } = await supabase
-  //           .from("Workouts")
-  //           .select()
-  //           .eq("id", Number(workoutId))
-  //           .single();
-  //         resolve(data);
-  //       }, 10000); // 5-second delay
-  //     });
-  //   },
-  // });
-
   if (!data) {
     return (
       <SafeAreaView>
@@ -52,13 +35,16 @@ function WorkoutDetails() {
   }
 
   return (
-    <Box>
-      <View style={{ gap: "5%", maxWidth: "90%" }}>
-        <Image style={{ borderRadius: 10 }} source={data.imageUrl} />
-        <Text> {data.name}</Text>
+    <Screen>
+      <ScrollView
+        style={{ width: "100%" }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <Video source={data.videoUrl} text={data.name} />
         <Text>{data.content}</Text>
-      </View>
-    </Box>
+      </ScrollView>
+    </Screen>
   );
 }
 

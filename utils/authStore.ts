@@ -18,11 +18,3 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ session: null, user: null });
   },
 }));
-
-supabase.auth.getSession().then(({ data: { session } }) => {
-  useAuthStore.getState().setSession(session);
-});
-
-supabase.auth.onAuthStateChange((_event, session) => {
-  useAuthStore.getState().setSession(session);
-});

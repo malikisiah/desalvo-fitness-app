@@ -9,12 +9,12 @@ const Screen = ({ children }: { children: ReactNode }) => {
   return (
     <SafeAreaView
       style={{
-        flex: 1,
         width: "100%",
+        flex: 1,
         backgroundColor: theme.colors.mainBackground,
       }}
     >
-      <Box flex={1} alignItems="center" width={"100%"} marginTop="s">
+      <Box alignItems="center" width={"100%"}>
         {children}
       </Box>
     </SafeAreaView>

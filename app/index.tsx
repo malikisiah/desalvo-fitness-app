@@ -1,21 +1,32 @@
 import { useRouter } from "expo-router";
-import { Session } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
+
+import { useEffect } from "react";
 import Auth from "@/components/Auth";
 import { supabase } from "@/utils/supabase";
+import { useAuthStore } from "@/utils/authStore";
 
 export default function Index() {
-  const [session, setSession] = useState<Session | null>(null);
+  const { setSession, session } = useAuthStore();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setSession(session);
-    });
+    };
+    fetchSession();
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+    const { data: authListner } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => {
+      authListner.subscription.unsubscribe();
+    };
+  }, [setSession]);
 
   const router = useRouter();
 

@@ -44,6 +44,7 @@ export default function Tab() {
             title={item.name}
             image={item.imageUrl}
             content={item.description}
+            href={`/${item.id.toString()}`}
           />
         )}
         contentContainerStyle={{
