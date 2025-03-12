@@ -21,7 +21,7 @@ const palette = {
 const theme = createTheme({
   colors: {
     mainBackground: palette.white,
-    cardPrimaryBackground: palette.purplePrimary,
+    cardPrimaryBackground: palette.grayLight,
     primary: palette.DeSalvoBlue,
     secondary: palette.greenPrimary,
     danger: palette.red,
@@ -53,11 +53,31 @@ const theme = createTheme({
       color: "textPrimary",
     },
 
+    subheader: {
+      fontFamily: "Urbanist",
+      fontsize: 28,
+      color: "textPrimary",
+    },
+
     defaults: {
       fontSize: 14,
       fontFamily: "Urbanist",
       color: "textPrimary",
       fontWeight: "semibold",
+    },
+  },
+
+  cardVariants: {
+    defaults: {
+      backgroundColor: "cardPrimaryBackground",
+      padding: "m",
+      borderRadius: "l",
+      shadowColor: "textPrimary",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+      elevation: 3,
+      width: "100%",
     },
   },
 });

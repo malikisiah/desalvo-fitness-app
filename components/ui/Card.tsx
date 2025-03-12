@@ -1,22 +1,45 @@
-// import {
-//   createRestyleComponent,
-//   spacing,
-//   color,
-//   ColorProps,
-//   SpacingProps,
-// } from "@shopify/restyle";
-// import { Theme } from "@/utils/theme";
+import {
+  createRestyleComponent,
+  VariantProps,
+  createVariant,
+  spacing,
+  SpacingProps,
+} from "@shopify/restyle";
+import { View, ViewProps } from "react-native";
+import { Theme } from "@/utils/theme";
+import Box from "./Box";
+import { Image } from "expo-image";
+import Text from "./Text";
 
-// type Props = SpacingProps<Theme> &
-//   ColorProps<Theme> & {
-//     title: string;
-//     content: string;
-//     image: string;
-//   };
-// const BaseCard = createRestyleComponent<Props, Theme>([spacing, color]);
+type Props = VariantProps<Theme, "cardVariants"> &
+  ViewProps &
+  SpacingProps<Theme>;
+const CardContainer = createRestyleComponent<Props, Theme>(
+  [createVariant({ themeKey: "cardVariants" }), spacing],
+  View
+);
 
-// const Card: React.FC<Props> = ({ title, content, image, ...rest }) => {
-//   return  (<BaseCard ></BaseCard>)
-// };
+const Card = ({
+  image,
+  title,
+  content,
+}: {
+  image: string;
+  title: string;
+  content: string;
+}) => {
+  return (
+    <CardContainer>
+      <Box>
+        <Text>{title}</Text>
+        <Image
+          source={image}
+          style={{ flex: 1, aspectRatio: "16/9", width: "100%" }}
+        />
+        <Text>{content}</Text>
+      </Box>
+    </CardContainer>
+  );
+};
 
-// export default Card;
+export default Card;

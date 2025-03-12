@@ -1,8 +1,11 @@
-import { FlatList, View, Text, ActivityIndicator } from "react-native";
+import { FlatList, ActivityIndicator } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
 import Box from "@/components/ui/Box";
+import Screen from "@/components/ui/Screen";
 
+import Text from "@/components/ui/Text";
+import Card from "@/components/ui/Card";
 export default function Tab() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["workouts"],
@@ -30,25 +33,27 @@ export default function Tab() {
   }
 
   return (
-    <Box>
-      <View style={{ width: "100%" }}>
-        <Text style={{ textAlign: "center" }}>Workouts</Text>
-        <FlatList
-          data={data || []} // Ensure data is always an array
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) =>
-            item.id?.toString() ?? Math.random().toString()
-          }
-          renderItem={({ item }) => <Text> {item.name}</Text>}
-          contentContainerStyle={{
-            flexGrow: 1,
-            alignItems: "center",
-            gap: 20,
-            paddingBottom: "10%",
-          }}
-          style={{ width: "100%" }}
-        />
-      </View>
-    </Box>
+    <Screen>
+      <Text variant="header">Workouts</Text>
+      <FlatList
+        data={data || []}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id?.toString() ?? Math.random().toString()}
+        renderItem={({ item }) => (
+          <Card
+            title={item.name}
+            image={item.imageUrl}
+            content={item.description}
+          />
+        )}
+        contentContainerStyle={{
+          flexGrow: 1,
+          alignItems: "center",
+          gap: 20,
+          paddingBottom: "10%",
+        }}
+        style={{ width: "100%", marginTop: "5%" }}
+      />
+    </Screen>
   );
 }
