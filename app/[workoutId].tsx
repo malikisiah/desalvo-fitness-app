@@ -7,6 +7,7 @@ import { ScrollView, View } from "react-native";
 import React, { Suspense } from "react";
 import Screen from "@/components/ui/Screen";
 import Video from "@/components/ui/Video";
+import Box from "@/components/ui/Box";
 
 function WorkoutDetails() {
   const { workoutId } = useLocalSearchParams();
@@ -42,7 +43,9 @@ function WorkoutDetails() {
         showsVerticalScrollIndicator={false}
       >
         <Video source={data.videoUrl} text={data.name} />
-        <Text>{data.content}</Text>
+        <Box padding="m">
+          <Text>{data.content}</Text>
+        </Box>
       </ScrollView>
     </Screen>
   );

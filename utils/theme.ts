@@ -61,7 +61,7 @@ const theme = createTheme({
     },
 
     defaults: {
-      fontSize: 14,
+      fontSize: 15,
       fontFamily: "Urbanist",
       color: "textPrimary",
       fontWeight: "semibold",
@@ -71,7 +71,6 @@ const theme = createTheme({
   cardVariants: {
     defaults: {
       backgroundColor: "cardPrimaryBackground",
-      padding: "m",
       borderRadius: "l",
       shadowColor: "textPrimary",
       shadowOffset: { width: 0, height: 4 },

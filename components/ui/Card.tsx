@@ -33,20 +33,24 @@ const Card = ({
   href: `/${string}`;
 } & Props) => {
   return (
-    <CardContainer {...rest}>
-      <Box gap="s">
+    <CardContainer {...rest} style={{ overflow: "hidden" }}>
+      <Image
+        source={image}
+        style={{
+          flex: 1,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+          aspectRatio: "16/9",
+        }}
+      />
+      <Box gap="s" padding="m">
         <Text variant="subheader">{title}</Text>
-        <Image
-          source={image}
-          style={{
-            flex: 1,
-            aspectRatio: "16/9",
-            width: "100%",
-            borderRadius: 10,
-          }}
-        />
         <Text>{content}</Text>
-        <Link href={href}>Action</Link>
+        <Link href={href}>
+          <Text color="primary" textAlign="center">
+            View
+          </Text>
+        </Link>
       </Box>
     </CardContainer>
   );

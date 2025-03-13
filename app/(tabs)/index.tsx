@@ -4,7 +4,7 @@ import Screen from "@/components/ui/Screen";
 export default function Index() {
   return (
     <Screen>
-      <Text variant="header">Hello</Text>
+      <Text variant="header">Home</Text>
     </Screen>
   );
 }

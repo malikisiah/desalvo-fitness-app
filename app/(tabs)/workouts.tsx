@@ -51,9 +51,8 @@ export default function Tab() {
           flexGrow: 1,
           alignItems: "center",
           gap: 20,
-          paddingBottom: "10%",
         }}
-        style={{ width: "100%", marginTop: "5%" }}
+        style={{ width: "100%", marginVertical: "10%" }}
       />
     </Screen>
   );
