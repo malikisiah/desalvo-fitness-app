@@ -58,13 +58,13 @@ const theme = createTheme({
       fontFamily: "Urbanist",
       fontSize: 28,
       color: "textPrimary",
+      textAlign: "center",
     },
 
     defaults: {
       fontSize: 15,
       fontFamily: "Urbanist",
       color: "textPrimary",
-      fontWeight: "semibold",
     },
   },
 
@@ -78,6 +78,24 @@ const theme = createTheme({
       shadowRadius: 6,
       elevation: 3,
       width: "90%",
+    },
+  },
+
+  inputVariants: {
+    defaults: {
+      fontSize: 16,
+      width: "80%",
+      padding: "s",
+      borderRadius: "l",
+      borderWidth: 1,
+      borderColor: "textAccent",
+      backgroundColor: "cardPrimaryBackground",
+      color: "textPrimary",
+      shadowColor: "textPrimary",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 4,
+      elevation: 2,
     },
   },
 });

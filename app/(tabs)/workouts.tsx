@@ -1,13 +1,14 @@
-import { FlatList, ActivityIndicator } from "react-native";
+import { FlatList } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-import Box from "@/components/ui/Box";
+
 import Screen from "@/components/ui/Screen";
 
 import Text from "@/components/ui/Text";
 import Card from "@/components/ui/Card";
+import Loading from "@/components/ui/Loading";
 export default function Tab() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["workouts"],
     queryFn: async () => {
       const { data, error } = await supabase.from("Workouts").select();
@@ -17,19 +18,7 @@ export default function Tab() {
   });
 
   if (isLoading) {
-    return (
-      <Box>
-        <ActivityIndicator size="large" />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box>
-        <Text style={{ color: "red" }}>Error loading workouts</Text>
-      </Box>
-    );
+    return <Loading />;
   }
 
   return (

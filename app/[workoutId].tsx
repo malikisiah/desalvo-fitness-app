@@ -8,6 +8,9 @@ import React, { Suspense } from "react";
 import Screen from "@/components/ui/Screen";
 import Video from "@/components/ui/Video";
 import Box from "@/components/ui/Box";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Loading from "@/components/ui/Loading";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 function WorkoutDetails() {
   const { workoutId } = useLocalSearchParams();
@@ -43,7 +46,27 @@ function WorkoutDetails() {
         showsVerticalScrollIndicator={false}
       >
         <Video source={data.videoUrl} text={data.name} />
-        <Box padding="m">
+        <Box padding="m" gap="s">
+          <Text variant="subheader" fontWeight={"condensedBold"}>
+            <MaterialCommunityIcons
+              name="arm-flex-outline"
+              size={24}
+              color="black"
+            />
+            How To Perform:
+          </Text>
+          <Text>{data.content}</Text>
+        </Box>
+        <Box padding="m" gap="s">
+          <Text variant="subheader">
+            <FontAwesome
+              name="hand-stop-o"
+              size={24}
+              color="black"
+              style={{ color: "red" }}
+            />{" "}
+            What to Avoid
+          </Text>
           <Text>{data.content}</Text>
         </Box>
       </ScrollView>
@@ -53,7 +76,7 @@ function WorkoutDetails() {
 
 export default function Page() {
   return (
-    <Suspense fallback={<Text> Loading... </Text>}>
+    <Suspense fallback={<Loading />}>
       <WorkoutDetails />
     </Suspense>
   );
