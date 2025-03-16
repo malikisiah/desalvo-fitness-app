@@ -13,7 +13,7 @@ const Screen = ({ children }: { children: ReactNode }) => {
         backgroundColor: theme.colors.mainBackground,
       }}
     >
-      <Box width={"100%"} marginTop="s" alignItems="center">
+      <Box width={"100%"} marginTop="m" alignItems="center">
         {children}
       </Box>
     </SafeAreaView>

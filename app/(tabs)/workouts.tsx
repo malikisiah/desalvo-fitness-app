@@ -1,13 +1,19 @@
 import { FlatList } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
-
 import Screen from "@/components/ui/Screen";
-
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/utils/theme";
 import Text from "@/components/ui/Text";
 import Card from "@/components/ui/Card";
 import Loading from "@/components/ui/Loading";
+import Input from "@/components/ui/Input";
+
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+
 export default function Tab() {
+  const theme = useTheme<Theme>();
+  const tabBarHeight = useBottomTabBarHeight();
   const { data, isLoading } = useQuery({
     queryKey: ["workouts"],
     queryFn: async () => {
@@ -24,6 +30,11 @@ export default function Tab() {
   return (
     <Screen>
       <Text variant="header">Workouts</Text>
+      <Input
+        placeholder="Search..."
+        placeholderTextColor={theme.colors.primary}
+      />
+
       <FlatList
         data={data || []}
         showsVerticalScrollIndicator={false}
@@ -40,8 +51,14 @@ export default function Tab() {
           flexGrow: 1,
           alignItems: "center",
           gap: 20,
+          marginTop: "2%",
+          paddingBottom: tabBarHeight,
         }}
-        style={{ width: "100%", marginVertical: "10%" }}
+        style={{
+          width: "100%",
+          marginBottom: tabBarHeight + 20,
+          padding: "5%",
+        }}
       />
     </Screen>
   );
