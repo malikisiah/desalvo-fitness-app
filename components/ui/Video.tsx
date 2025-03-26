@@ -1,13 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { useVideoPlayer, VideoView } from "expo-video";
 
-export default function Video({
-  source,
-  text,
-}: {
-  source: string;
-  text: string;
-}) {
+export default function Video({ source }: { source: string }) {
   const player = useVideoPlayer(source, (player) => {
     player.loop = true;
     player.play();
@@ -22,7 +16,8 @@ export default function Video({
 
 const styles = StyleSheet.create({
   container: {
-    aspectRatio: "3/4",
+    flex: 1,
+    aspectRatio: "9/16",
   },
   video: {
     width: "100%",

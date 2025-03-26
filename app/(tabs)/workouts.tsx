@@ -10,10 +10,14 @@ import Loading from "@/components/ui/Loading";
 import Input from "@/components/ui/Input";
 
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 
 export default function Tab() {
   const theme = useTheme<Theme>();
   const tabBarHeight = useBottomTabBarHeight();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
   const { data, isLoading } = useQuery({
     queryKey: ["workouts"],
     queryFn: async () => {
@@ -23,6 +27,10 @@ export default function Tab() {
     },
   });
 
+  const filteredData = data?.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (isLoading) {
     return <Loading />;
   }
@@ -30,13 +38,16 @@ export default function Tab() {
   return (
     <Screen>
       <Text variant="header">Workouts</Text>
+
       <Input
+        onChangeText={(text) => setSearchQuery(text)}
         placeholder="Search..."
         placeholderTextColor={theme.colors.primary}
       />
 
       <FlatList
-        data={data || []}
+        data={filteredData || []}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id?.toString() ?? Math.random().toString()}
         renderItem={({ item }) => (
@@ -47,9 +58,11 @@ export default function Tab() {
             href={`/${item.id.toString()}`}
           />
         )}
+        columnWrapperStyle={{
+          justifyContent: "center",
+          gap: "10%",
+        }}
         contentContainerStyle={{
-          flexGrow: 1,
-          alignItems: "center",
           gap: 20,
           marginTop: "2%",
           paddingBottom: tabBarHeight,

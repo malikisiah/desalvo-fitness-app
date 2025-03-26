@@ -61,6 +61,12 @@ const theme = createTheme({
       textAlign: "center",
     },
 
+    accent: {
+      fontSize: 15,
+      color: "primary",
+      textAlign: "center",
+    },
+
     defaults: {
       fontSize: 15,
       fontFamily: "Urbanist",
@@ -77,7 +83,7 @@ const theme = createTheme({
       shadowOpacity: 0.1,
       shadowRadius: 6,
       elevation: 3,
-      width: "90%",
+      width: "40%",
     },
   },
 

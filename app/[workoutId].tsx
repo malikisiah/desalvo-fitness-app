@@ -38,40 +38,7 @@ function WorkoutDetails() {
     );
   }
 
-  return (
-    <Screen>
-      <ScrollView
-        style={{ width: "100%" }}
-        contentContainerStyle={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <Video source={data.videoUrl} text={data.name} />
-        <Box padding="m" gap="s">
-          <Text variant="subheader" fontWeight={"condensedBold"}>
-            <MaterialCommunityIcons
-              name="arm-flex-outline"
-              size={24}
-              color="black"
-            />
-            How To Perform:
-          </Text>
-          <Text>{data.content}</Text>
-        </Box>
-        <Box padding="m" gap="s">
-          <Text variant="subheader">
-            <FontAwesome
-              name="hand-stop-o"
-              size={24}
-              color="black"
-              style={{ color: "red" }}
-            />{" "}
-            What to Avoid
-          </Text>
-          <Text>{data.content}</Text>
-        </Box>
-      </ScrollView>
-    </Screen>
-  );
+  return <Video source={data.videoUrl} />;
 }
 
 export default function Page() {

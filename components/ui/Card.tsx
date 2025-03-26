@@ -44,12 +44,8 @@ const Card = ({
         }}
       />
       <Box gap="s" padding="m">
-        <Text variant="subheader">{title}</Text>
-        <Text>{content}</Text>
         <Link href={href}>
-          <Text color="primary" textAlign="center">
-            View
-          </Text>
+          <Text variant="accent">{title}</Text>
         </Link>
       </Box>
     </CardContainer>
