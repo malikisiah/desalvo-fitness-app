@@ -1,15 +1,22 @@
 import Text from "@/components/ui/Text";
 import Screen from "@/components/ui/Screen";
 import Box from "@/components/ui/Box";
+import { useNotification } from "@/context/NotificationContext";
 
 export default function Index() {
+  const { expoPushToken, notification } = useNotification();
   return (
     <Screen>
-      <Text variant="header">Tip of the Week!</Text>
+      <Text variant="header">My Push Token</Text>
+      <Box margin="m">
+        <Text>{expoPushToken}</Text>
+      </Box>
+      <Text variant="header">Latest Notification</Text>
       <Box margin="m">
         <Text>
-          Lorem ipsum odor amet, consectetuer adipiscing elit. Mus vitae dapibus
-          duis hac convallis. Magna urna sodales nibh vitae dignissim.
+          {notification?.request.content.data
+            ? JSON.stringify(notification.request.content.data)
+            : "No data available"}
         </Text>
       </Box>
     </Screen>

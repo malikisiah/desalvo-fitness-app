@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "desalvofitnessappios",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "softwareKeyboardLayoutMode": "pan",
@@ -20,7 +24,9 @@
       "androidNavigationBar": {
         "backgroundColor": "#121212",
         "barStyle": "light-content"
-      }
+      },
+      "package": "com.malikisiah214.desalvofitnessapp",
+      "googleServicesFile": "google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -42,7 +48,9 @@
       [
         "expo-font",
         {
-          "fonts": ["node_modules/@expo-google-fonts/inter/Inter_900Black.ttf"]
+          "fonts": [
+            "node_modules/@expo-google-fonts/inter/Inter_900Black.ttf"
+          ]
         }
       ]
     ],
