@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-
 import { useEffect } from "react";
 import Auth from "@/components/Auth";
 import { supabase } from "@/utils/supabase";

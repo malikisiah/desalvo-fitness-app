@@ -27,7 +27,7 @@ const theme = createTheme({
     danger: palette.red,
     textPrimary: palette.black,
     textSecondary: palette.grayDark,
-    textAccent: palette.white,
+    textAccent: palette.grayLight,
   },
 
   spacing: {

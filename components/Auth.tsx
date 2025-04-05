@@ -1,104 +1,68 @@
-import React, { useState } from "react";
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  View,
-} from "react-native";
 import { supabase } from "@/utils/supabase";
-
-import { Button, TextInput } from "react-native";
+import Screen from "./ui/Screen";
 import Box from "./ui/Box";
+import {
+  GoogleSignin,
+  isSuccessResponse,
+  isErrorWithCode,
+  statusCodes,
+  GoogleSigninButton,
+} from "@react-native-google-signin/google-signin";
 export default function Auth() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const handleGoogleSignin = async () => {
+    try {
+      // Trigger the Google sign-in flow
+      GoogleSignin.configure({
+        webClientId:
+          "278447901168-7oons3dihfc0i4v7aj6pa2qmdc7nitmq.apps.googleusercontent.com",
+      });
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        // Get the ID token from the Google response
+        const {
+          data: { idToken },
+        } = response;
+        // Use the ID token to sign in with Supabase
+        if (idToken) {
+          const { error } = await supabase.auth.signInWithIdToken({
+            provider: "google",
+            token: idToken, // Pass the ID token from Google
+          });
 
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-  }
-
-  async function signUpWithEmail() {
-    setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    if (!session) setLoading(false);
-  }
+          if (error) {
+            console.error("Failed to sign in with Supabase:", error);
+            return;
+          }
+        } else {
+          console.error("ID token is null");
+        }
+      }
+    } catch (error) {
+      if (
+        isErrorWithCode(error) &&
+        error.code === statusCodes.SIGN_IN_CANCELLED
+      ) {
+        // User cancelled the sign-in flow
+        console.log("User cancelled the Google sign-in");
+      } else if (
+        isErrorWithCode(error) &&
+        error.code === statusCodes.IN_PROGRESS
+      ) {
+        // Sign-in is in progress already
+        console.log("Google sign-in is in progress");
+      } else {
+        // Handle other errors
+        console.error("Google sign-in failed:", error);
+      }
+    }
+  };
 
   return (
-    <Box>
-      <View style={styles.container}>
-        <View style={[styles.verticallySpaced, styles.mt20]}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-          >
-            <TextInput
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-              placeholder="email@address.com"
-              autoCapitalize={"none"}
-            />
-          </KeyboardAvoidingView>
-        </View>
-        <View style={styles.verticallySpaced}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-          >
-            <TextInput
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              secureTextEntry={true}
-              placeholder="Password"
-              autoCapitalize={"none"}
-            />
-          </KeyboardAvoidingView>
-        </View>
-        <View style={[styles.verticallySpaced, styles.mt20]}>
-          <Button
-            title="Sign In"
-            disabled={loading}
-            onPress={() => signInWithEmail()}
-          />
-        </View>
-        <View style={styles.verticallySpaced}>
-          <Button
-            title="Sign Up"
-            disabled={loading}
-            onPress={() => signUpWithEmail()}
-          />
-        </View>
-      </View>
-    </Box>
+    <Screen>
+      <Box>
+        <GoogleSigninButton onPress={() => handleGoogleSignin()} />
+      </Box>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-    width: "100%",
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});

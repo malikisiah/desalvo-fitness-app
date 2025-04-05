@@ -42,7 +42,7 @@ export default function Tab() {
       <Input
         onChangeText={(text) => setSearchQuery(text)}
         placeholder="Search..."
-        placeholderTextColor={theme.colors.primary}
+        placeholderTextColor={theme.colors.textSecondary} // Use a color from your theme
       />
 
       <FlatList
