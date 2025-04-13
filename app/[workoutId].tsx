@@ -3,14 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
 import Text from "@/components/ui/Text";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import React, { Suspense } from "react";
-import Screen from "@/components/ui/Screen";
 import Video from "@/components/ui/Video";
-import Box from "@/components/ui/Box";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Loading from "@/components/ui/Loading";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 function WorkoutDetails() {
   const { workoutId } = useLocalSearchParams();
