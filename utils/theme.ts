@@ -11,7 +11,7 @@ const palette = {
   greenDark: "#0A906E",
 
   black: "#0B0B0B",
-  white: "#FFFFFF",
+  white: "#fffbfa",
   grayLight: "#F5F5F5",
   grayMedium: "#BDBDBD",
   grayDark: "#828282",

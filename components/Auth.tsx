@@ -1,5 +1,5 @@
 import { supabase } from "@/utils/supabase";
-import Screen from "./ui/Screen";
+
 import Box from "./ui/Box";
 import {
   GoogleSignin,
@@ -13,8 +13,8 @@ export default function Auth() {
     try {
       // Trigger the Google sign-in flow
       GoogleSignin.configure({
-        webClientId:
-          "278447901168-7oons3dihfc0i4v7aj6pa2qmdc7nitmq.apps.googleusercontent.com",
+        webClientId: process.env.WEB_CLIENT_ID,
+        iosClientId: process.env.IOS_CLIENT_ID,
       });
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
@@ -59,10 +59,8 @@ export default function Auth() {
   };
 
   return (
-    <Screen>
-      <Box>
-        <GoogleSigninButton onPress={() => handleGoogleSignin()} />
-      </Box>
-    </Screen>
+    <Box>
+      <GoogleSigninButton onPress={() => handleGoogleSignin()} />
+    </Box>
   );
 }

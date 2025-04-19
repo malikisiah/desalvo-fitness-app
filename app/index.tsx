@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import Auth from "@/components/Auth";
 import { supabase } from "@/utils/supabase";
 import { useAuthStore } from "@/utils/authStore";
+import { Image } from "expo-image";
+import Box from "@/components/ui/Box";
+import SafeAreaView from "@/components/ui/SafeAreaView";
 
 export default function Index() {
   const { setSession, session } = useAuthStore();
@@ -35,5 +38,15 @@ export default function Index() {
     }
   });
 
-  return <Auth />;
+  return (
+    <SafeAreaView>
+      <Box justifyContent="center" alignItems="center" flex={1} gap="l">
+        <Image
+          source={require("../assets/images/logo.png")}
+          style={{ width: "100%", height: "25%" }}
+        />
+        <Auth />
+      </Box>
+    </SafeAreaView>
+  );
 }

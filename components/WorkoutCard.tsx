@@ -10,7 +10,13 @@ export default function WorkoutCard({
   workout: Database["public"]["Tables"]["Workouts"]["Row"];
 }) {
   return (
-    <Card style={{ width: "95%" }}>
+    <Card
+      style={{ width: "95%" }}
+      image={""}
+      title={""}
+      content={""}
+      href={"/"}
+    >
       <View>
         <Image
           source={workout.imageUrl}
