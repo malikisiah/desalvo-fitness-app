@@ -4,6 +4,7 @@ import { useVideoPlayer, VideoView } from "expo-video";
 export default function Video({ source }: { source: string }) {
   const player = useVideoPlayer(source, (player) => {
     player.loop = true;
+    player.muted = true;
     player.play();
   });
 

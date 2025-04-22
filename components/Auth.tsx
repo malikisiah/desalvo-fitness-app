@@ -12,14 +12,15 @@ export default function Auth() {
   const handleGoogleSignin = async () => {
     try {
       // Trigger the Google sign-in flow
+
       GoogleSignin.configure({
-        webClientId: process.env.WEB_CLIENT_ID,
-        iosClientId: process.env.IOS_CLIENT_ID,
+        webClientId: process.env.EXPO_PUBLIC_WEB_CLIENT_ID,
       });
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
         // Get the ID token from the Google response
+        console.log(response);
         const {
           data: { idToken },
         } = response;
