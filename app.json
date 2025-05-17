@@ -48,16 +48,14 @@
       [
         "expo-font",
         {
-          "fonts": [
-            "node_modules/@expo-google-fonts/inter/Inter_900Black.ttf"
-          ]
+          "fonts": ["node_modules/@expo-google-fonts/inter/Inter_900Black.ttf"]
         }
       ],
-      
+
       [
         "@react-native-google-signin/google-signin",
         {
-          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
+          "iosUrlScheme": "com.googleusercontent.apps.278447901168-0tsolgk65fin2tldp97r1plk482tdv6i"
         }
       ]
     ],
