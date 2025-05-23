@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { useVideoPlayer, VideoView } from "expo-video";
+import { StatusBar } from "expo-status-bar";
 
 export default function Video({ source }: { source: string }) {
   const player = useVideoPlayer(source, (player) => {
@@ -10,6 +11,7 @@ export default function Video({ source }: { source: string }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <VideoView style={styles.video} player={player} />
     </View>
   );
@@ -17,8 +19,12 @@ export default function Video({ source }: { source: string }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    aspectRatio: "9/16",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 1,
   },
   video: {
     width: "100%",

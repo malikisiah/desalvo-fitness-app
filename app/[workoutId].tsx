@@ -1,9 +1,8 @@
 import { useLocalSearchParams } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/utils/supabase";
 import Text from "@/components/ui/Text";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { Suspense } from "react";
 import Video from "@/components/ui/Video";
 import Loading from "@/components/ui/Loading";
@@ -25,16 +24,17 @@ function WorkoutDetails() {
 
   if (!data) {
     return (
-      <SafeAreaView>
-        <View
-          style={{ flex: 1, alignItems: "center", marginTop: "20%" }}
-        ></View>
+      <View style={styles.fallbackContainer}>
         <Text>No Workout Found</Text>
-      </SafeAreaView>
+      </View>
     );
   }
 
-  return <Video source={data.videoUrl} />;
+  return (
+    <View style={styles.fullscreenContainer}>
+      <Video source={data.videoUrl} />
+    </View>
+  );
 }
 
 export default function Page() {
@@ -44,3 +44,19 @@ export default function Page() {
     </Suspense>
   );
 }
+
+const styles = StyleSheet.create({
+  fullscreenContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    padding: 0,
+    margin: 0,
+    backgroundColor: "black",
+  },
+  fallbackContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
