@@ -10,6 +10,8 @@ import React, {
 import * as Notifications from "expo-notifications";
 import { EventSubscription as Subscription } from "expo-notifications";
 import { registerForPushNotificationsAsync } from "@/utils/registerForPushNotificationsAsync";
+import { useAuthStore } from "@/utils/authStore";
+import { supabase } from "@/utils/supabase";
 
 interface NotificationContextType {
   expoPushToken: string | null; // The push token for the device
@@ -46,11 +48,29 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
   const notificationListener = useRef<Subscription | null>(null); // Ref to store the notification listener subscription
   const responseListener = useRef<Subscription | null>(null); // Ref to store the response listener subscription
 
+  const { user } = useAuthStore();
+
   useEffect(() => {
+    const updateExpoPushToken = async (token: string) => {
+      console.log("Updating expo push token:", token);
+      console.log("User ID:", user?.id);
+      if (user) {
+        const { error } = await supabase
+          .from("profiles")
+          .update({ expo_push_token: token })
+          .eq("id", user.id);
+
+        if (error) {
+          console.error("Error updating expo push token:", error);
+        }
+      }
+    };
+
     registerForPushNotificationsAsync()
       .then((token) => {
         if (token) {
           setExpoPushToken(token);
+          updateExpoPushToken(token);
         }
       })
       .catch((err) => {
@@ -80,6 +100,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
         Notifications.removeNotificationSubscription(responseListener.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

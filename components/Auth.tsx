@@ -20,7 +20,6 @@ export default function Auth() {
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
         // Get the ID token from the Google response
-        console.log(response);
         const {
           data: { idToken },
         } = response;

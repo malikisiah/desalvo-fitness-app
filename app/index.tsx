@@ -33,6 +33,7 @@ export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
+    // Redirect to the main app if the user is already logged in
     if (session?.user) {
       router.replace("/(tabs)");
     }
