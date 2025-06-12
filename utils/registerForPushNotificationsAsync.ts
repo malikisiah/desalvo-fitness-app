@@ -44,7 +44,7 @@ export async function registerForPushNotificationsAsync() {
         await Notifications.getExpoPushTokenAsync({ projectId })
       ).data;
       // Log and return the push token
-      console.log("Push notification token:", pushTokenString);
+
       return pushTokenString;
     } catch (error) {
       // Handle the case where getting the push token fails
