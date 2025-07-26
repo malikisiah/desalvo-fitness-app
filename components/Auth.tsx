@@ -90,7 +90,9 @@ export default function Auth() {
   return (
     <Box>
       <GoogleSigninButton onPress={() => handleGoogleSignin()} />
-      <AppleSignInButton onPress={() => handleAppleSignIn()} />
+      {Platform.OS === "ios" && (
+        <AppleSignInButton onPress={() => handleAppleSignIn()} />
+      )}
     </Box>
   );
 }
