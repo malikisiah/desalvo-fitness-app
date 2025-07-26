@@ -1,4 +1,5 @@
 import { supabase } from "@/utils/supabase";
+import * as AppleAuthentication from "expo-apple-authentication";
 
 import Box from "./ui/Box";
 import {
@@ -8,6 +9,8 @@ import {
   statusCodes,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
+import AppleSignInButton from "./AppleSignInButton";
+import { Platform } from "react-native";
 export default function Auth() {
   const handleGoogleSignin = async () => {
     try {
@@ -58,9 +61,36 @@ export default function Auth() {
     }
   };
 
+  const handleAppleSignIn = async () => {
+    try {
+      const creds = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      // Sign in via Supabase Auth
+      if (creds.identityToken) {
+        const { error } = await supabase.auth.signInWithIdToken({
+          provider: "apple",
+          token: creds.identityToken,
+        });
+
+        if (error) {
+          console.error("Failed to sign in with Supabase:", error);
+          return;
+        }
+      }
+    } catch (error) {
+      console.error("Apple Sign-In error:", error);
+      return;
+    }
+  };
+
   return (
     <Box>
       <GoogleSigninButton onPress={() => handleGoogleSignin()} />
+      <AppleSignInButton onPress={() => handleAppleSignIn()} />
     </Box>
   );
 }

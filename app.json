@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "usesAppleSignIn": true,
       "supportsTablet": true,
       "bundleIdentifier": "desalvofitnessappios",
       "infoPlist": {
@@ -57,7 +58,8 @@
         {
           "iosUrlScheme": "com.googleusercontent.apps.278447901168-0tsolgk65fin2tldp97r1plk482tdv6i"
         }
-      ]
+      ],
+      "expo-apple-authentication"
     ],
     "experiments": {
       "typedRoutes": true
