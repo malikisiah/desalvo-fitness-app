@@ -1,6 +1,8 @@
 import { StyleSheet, View } from "react-native";
-import { useVideoPlayer, VideoView } from "expo-video";
+import { useVideoPlayer } from "expo-video";
+import { VideoViewWithBackButton } from "../VideoViewWithBackButton";
 import { StatusBar } from "expo-status-bar";
+import { router } from "expo-router";
 
 export default function Video({ source }: { source: string }) {
   const player = useVideoPlayer(source, (player) => {
@@ -12,7 +14,14 @@ export default function Video({ source }: { source: string }) {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <VideoView style={styles.video} player={player} />
+      <VideoViewWithBackButton
+        player={player}
+        onBackPress={() => {
+          // Handle back navigation
+          router.back();
+          // or router.back() if using Expo Router
+        }}
+      />
     </View>
   );
 }
