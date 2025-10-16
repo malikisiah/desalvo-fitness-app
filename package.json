@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "db:pull": "npx supabase gen types typescript --project-id pnuumfcutriffhbuofvx --schema public > database.types.ts"
+    "db:types": "npx supabase gen types typescript --project-id pnuumfcutriffhbuofvx --schema public > database.types.ts"
   },
   "jest": {
     "preset": "jest-expo"
