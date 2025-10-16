@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { supabase } from "./supabase";
 import { Session, User } from "@supabase/supabase-js";
+import { clearAppleSignIn, clearGoogleSignIn } from "@/components/Auth";
 
 interface Profile {
   full_name: string | null;
@@ -13,6 +14,7 @@ interface AuthState {
   profile: Profile | null;
   setSession: (session: Session | null) => void;
   logout: () => Promise<void>;
+  clearAuth: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -42,7 +44,18 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
   logout: async () => {
+    // Clear third-party auth as well
+    try {
+      await clearGoogleSignIn();
+      await clearAppleSignIn();
+    } catch (error) {
+      console.error("Error clearing third-party auth:", error);
+    }
+
     await supabase.auth.signOut();
-    set({ session: null, user: null });
+    set({ session: null, user: null, profile: null });
+  },
+  clearAuth: () => {
+    set({ session: null, user: null, profile: null });
   },
 }));

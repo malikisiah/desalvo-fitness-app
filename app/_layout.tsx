@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import queryClient from "@/utils/query-client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@shopify/restyle";
@@ -10,6 +10,7 @@ import * as Notifications from "expo-notifications";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { NotificationProvider } from "@/context/NotificationContext";
+import { useAuthStore } from "@/utils/authStore";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,6 +24,38 @@ Notifications.setNotificationHandler({
     };
   },
 });
+
+function RootLayoutNav() {
+  const segments = useSegments();
+  const router = useRouter();
+  const { session } = useAuthStore();
+
+  useEffect(() => {
+    const inAuthGroup = segments[0] === "(tabs)";
+    const onSignIn = segments[0] === "sign-in";
+
+    if (!session && inAuthGroup) {
+      // Redirect to sign-in if not authenticated and trying to access tabs
+      router.replace("/sign-in");
+    } else if (session && onSignIn) {
+      // Redirect to tabs if authenticated and on sign-in page
+      router.replace("/(tabs)");
+    }
+  }, [session, segments, router]);
+
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: "fade_from_bottom",
+      }}
+    >
+      <Stack.Screen name="index" />
+      <Stack.Screen name="sign-in" />
+      <Stack.Screen name="(tabs)" />
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -44,15 +77,7 @@ export default function RootLayout() {
     <NotificationProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              animation: "fade_from_bottom",
-            }}
-          >
-            <Stack.Screen name="index" />
-          </Stack>
-
+          <RootLayoutNav />
           <StatusBar style="dark" />
         </ThemeProvider>
       </QueryClientProvider>

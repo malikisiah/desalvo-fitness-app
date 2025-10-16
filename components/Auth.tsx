@@ -11,6 +11,7 @@ import {
 } from "@react-native-google-signin/google-signin";
 import AppleSignInButton from "./AppleSignInButton";
 import { Platform } from "react-native";
+
 export default function Auth() {
   const handleGoogleSignin = async () => {
     try {
@@ -96,3 +97,23 @@ export default function Auth() {
     </Box>
   );
 }
+
+// Export utility functions for clearing auth state
+export const clearGoogleSignIn = async () => {
+  try {
+    await GoogleSignin.configure({
+      webClientId: process.env.EXPO_PUBLIC_WEB_CLIENT_ID,
+      iosClientId: process.env.EXPO_PUBLIC_IOS_CLIENT_ID,
+    });
+    await GoogleSignin.signOut();
+    console.log("Google sign-in cleared");
+  } catch (error) {
+    console.error("Error clearing Google sign-in:", error);
+  }
+};
+
+export const clearAppleSignIn = async () => {
+  // Apple doesn't have a direct sign-out method, but we can try to clear any cached state
+  // The main clearing happens at the Supabase level
+  console.log("Apple sign-in state will be cleared on next sign-in attempt");
+};
